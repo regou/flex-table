@@ -1,12 +1,6 @@
 /** @jsx React.DOM */
 
-var tableData = {
-    thead:['Name','Age'],
-    tbody:[
-        ['wx',2],
-        ['wx2',4]
-    ]
-};
+
 
 var React = require('react');
 
@@ -20,7 +14,7 @@ var Head = React.createClass({
 
 });
 
-var Rows = React.createClass({
+var Body = React.createClass({
 
     render: function(){
         var r = [];
@@ -38,8 +32,8 @@ var Rows = React.createClass({
 var FlexTable = React.createClass({
     render:function(){
         return (<table>
-            <Head data={tableData.thead}/>
-            <Rows data={tableData.tbody}/>
+            <Head data={this.props.tableData.thead}/>
+            <Body data={this.props.tableData.tbody}/>
         </table>);
     }
 });
