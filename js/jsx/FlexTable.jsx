@@ -4,6 +4,7 @@
 
 var React = require('react');
 var util = require('./flexTableUtils');
+var _ = require('lodash');
 
 var Head = React.createClass({
     render:function() {
@@ -16,12 +17,15 @@ var Head = React.createClass({
 });
 
 
+function getVal(cellData){
+    return typeof(cellData)==='object' ? cellData.value:cellData;
+}
 
 var getMax = function(d){
     var curMax = 0;
    d.forEach(function(rowArr){
        rowArr.forEach(function(cellData){
-           var comparer = typeof(cellData)==='object' ? cellData.value:cellData;
+           var comparer = getVal(cellData);
            if(util.isNumber(comparer)){
                comparer=comparer*1;
                if(comparer>curMax){
@@ -32,6 +36,11 @@ var getMax = function(d){
    });
     return curMax;
 };
+var sortRow = function(d,index){
+    return _.sortBy(d, function(rowArr) {
+        return getVal(rowArr[index]);
+    });
+};
 var Body = React.createClass({
 
     render: function(){
@@ -39,9 +48,17 @@ var Body = React.createClass({
         var Component = this;
         var d = Component.props.data;
         var max = getMax(d);
+
+        var sortIndex = 0;
+        d = sortRow(d,sortIndex);
+
         d.forEach(function(rowItems,i){
            var items = rowItems.map(function(rowItem,i){
-               return <Cell max={max} type="d" key={i} value={rowItem}/>;
+               var additionProps = {};
+               if(i==sortIndex){
+                   additionProps.sortType="asc";
+               }
+               return <Cell {...additionProps} max={max} type="d" key={i} value={rowItem}/>;
            });
             r.push(<tr key={i}>{items}</tr>)
         });
@@ -65,6 +82,10 @@ var Cell = React.createClass({
             result = val;
         }
 
+
+        if(this.props.sortType){
+            cName +=' sort_'+this.props.sortType+'_cell'
+        }
         if(type==='h'){
             return <th className={cName}>{result}</th>;
         }else{
