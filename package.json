@@ -1,0 +1,27 @@
+{
+  "name": "patsnap-flex-table",
+  "version": "0.0.0",
+  "description": "flex table for inSight",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regou/patsnap-flex-table"
+  },
+  "author": "wangxiao",
+  "license": "ISC",
+  "homepage": "https://github.com/regou/patsnap-flex-table",
+  "devDependencies": {
+    "browserify": "*",
+    "react": "^0.12.1",
+    "reactify": "^0.17.1",
+    "envify": "^3.2.0"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  }
+}
