@@ -150,6 +150,13 @@ var FlexTable = React.createClass({
             isReverse:!this.state.isReverse
         });
     },
+    getDefaultProps:function(){
+        return {
+            className:"",
+            tableData:{},
+            postProcess:{}
+        }
+    },
     render:function(){
         return (<table className={'ps-flex-table '+this.props.className}>
             <Head {...this.state} updateSort={this._updateSortBy} data={this.props.tableData.thead}/>
