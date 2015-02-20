@@ -1,0 +1,68 @@
+
+.ps-flex-table {font-size:14px;min-width:100%; color:#555; border-top:#609900 solid 2px;
+    border-collapse: collapse;}
+
+.ps-flex-table tbody {line-height:1.1em;}
+.ps-flex-table tbody td {padding:10px 10px; border-bottom:#d2d2d2 solid 1px;vertical-align: middle;}
+
+
+
+
+.ps-flex-table .col-number {text-align: right;}
+
+
+.ps-flex-table thead {font-size:12px; color:#000; line-height:1.1em; }
+.ps-flex-table thead tr {border-bottom:#000 solid 1px;}
+.ps-flex-table thead th {padding:10px 10px; vertical-align: bottom;}
+.ps-flex-table thead span.title {display:inline-block; *zoom:1; *display:inline;}
+
+
+
+
+.ps-flex-table thead th{cursor: pointer;}
+
+
+.ps-flex-table thead .sort_desc {background:bottom right no-repeat; background-image:url('./desc.png');}
+.ps-flex-table thead .sort_asc {background:bottom right no-repeat; background-image:url('./asc.png');}
+.ps-flex-table thead th:hover {
+    background: #fbfbfb;  Old browsers
+    background: -moz-linear-gradient(top,  #fbfbfb 0%, #f0f0f0 100%);  FF3.6+
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f0f0f0));  Chrome,Safari4+
+    background: -webkit-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);  Chrome10+,Safari5.1+
+    background: -o-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);  Opera 11.10+
+    background: -ms-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);  IE10+
+    background: linear-gradient(to bottom,  #fbfbfb 0%,#f0f0f0 100%);  W3C
+
+}
+
+.sort_asc_cell,.sort_desc_cell{
+    color:#000; font-weight: bold;
+}
+
+
+
+/*color lv
+ sass:
+@each $header, $color in (1: #fdf8bb, 2: #f8e71c, 3: #f5a623,4:#f55123) {
+    .table-cell-lv#{$header} {
+        background-color: $color;
+    @if $header > 2 {
+        color: #FFF !important;
+    }
+}
+}
+
+*/
+.table-cell-lv1 {
+    background-color: #fdf8bb; }
+
+.table-cell-lv2 {
+    background-color: #f8e71c; }
+
+.table-cell-lv3 {
+    background-color: #f5a623;
+    color: #FFF !important; }
+
+.table-cell-lv4 {
+    background-color: #f55123;
+    color: #FFF !important; }

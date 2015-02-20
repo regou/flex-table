@@ -14,7 +14,7 @@ function colorfullCell(value,maxValue){
         .range([0,4]);
 
     if(isNumber(+value)){
-        var classname = 'table-cell-lv'+Math.round(color((+value)));
+        var classname = 'col-number table-cell-lv'+Math.round(color((+value)));
         return classname;
     }
 };
