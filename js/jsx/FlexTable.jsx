@@ -74,7 +74,10 @@ var Body = (function(){
 
             d.forEach(function(rowItems,i){
                 var items = rowItems.map(function(rowItem,i){
-                    var additionProps = {};
+                    var additionProps = {
+                        colIndex:i,
+                        postProcess:Component.props.postProcess.cell
+                    };
                     if(i==sortIndex){
                         additionProps.isReverse=isReverse;
                     }
@@ -93,7 +96,11 @@ var Cell = (function(){
     function getSortType (isReverse){
         if(typeof isReverse === "boolean"){return isReverse ? 'desc':'asc'}
     }
-    return React.createClass({
+    function postHandler(){
+        var postProcess = this.props.postProcess || function(){};
+        postProcess(this,this.props);
+    };
+    var Cell = React.createClass({
         render: function(){
             var max = this.props.max;
             var val = this.props.value;
@@ -119,8 +126,14 @@ var Cell = (function(){
                 return <td className={cName}>{result}</td>;
             }
 
-        }
+        },
+        componentDidUpdate:postHandler,
+        componentDidMount:postHandler
     });
+
+    postHandler.bind(Cell);
+
+    return Cell;
 })();
 
 function getDefSortData(){
@@ -140,7 +153,7 @@ var FlexTable = React.createClass({
     render:function(){
         return (<table className={'ps-flex-table '+this.props.className}>
             <Head {...this.state} updateSort={this._updateSortBy} data={this.props.tableData.thead}/>
-            <Body {...this.state} data={this.props.tableData.tbody}/>
+            <Body {...this.state} postProcess={this.props.postProcess} data={this.props.tableData.tbody}/>
         </table>);
     }
 });

@@ -81,7 +81,12 @@ var tableData = {
    ]
 };
 
+var postProcess = {
+   cell:function(cellComp,props){
+      console.log(props);
+   }
+};
 
 
 var FlexTable = require('./jsx/FlexTable.jsx');
-React.render(<FlexTable className='data-table' tableData={tableData}/>,document.body);
+React.render(<FlexTable postProcess={postProcess} className='data-table' tableData={tableData}/>,document.body);
