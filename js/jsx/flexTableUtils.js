@@ -4,14 +4,28 @@ function delHtmlTag (str){
     return result;
 };
 
-var d3 = require('d3');
+function linear (o){
+    var domain = o.domain;
+    var range = o.range;
+     return function(val){
+         if(val<=domain[0]){return range[0]};
+         if(val>=domain[1]){return range[1]};
+
+         var maxDist = domain[1] - domain[0];
+         var dist = val - domain[0];
+         var present = dist/maxDist;
+         return (range[1]-range[0])*present + range[0];
+
+
+     }
+};
 
 function colorfullCell(value,maxValue){
 
-
-    var color = d3.scale.linear()
-        .domain([0,maxValue])
-        .range([0,4]);
+    var color = linear({
+        domain:[0,maxValue],
+        range:[0,4]
+    });
 
     if(isNumber(+value)){
         var classname = 'col-number table-cell-lv'+Math.round(color((+value)));
