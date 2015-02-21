@@ -6,6 +6,9 @@ var React = require('react');
 var util = require('./flexTableUtils');
 var _ = require('lodash');
 
+
+var Cell = require('./Cell.jsx');
+
 var Head = React.createClass({
     getDefaultProps:function(){
         return {
@@ -33,29 +36,29 @@ function getVal(cellData){
     return typeof(cellData)==='object' ? cellData.value:cellData;
 }
 
-
-var Body = (function(){
-    var getMax = function(d){
-        var curMax = 0;
-        d.forEach(function(rowArr){
-            rowArr.forEach(function(cellData){
-                var comparer = getVal(cellData);
-                if(util.isNumber(comparer)){
-                    comparer=comparer*1;
-                    if(comparer>curMax){
-                        curMax = comparer;
-                    }
+var getMax = function(d){
+    var curMax = 0;
+    d.forEach(function(rowArr){
+        rowArr.forEach(function(cellData){
+            var comparer = getVal(cellData);
+            if(util.isNumber(comparer)){
+                comparer=comparer*1;
+                if(comparer>curMax){
+                    curMax = comparer;
                 }
-            })
-        });
-        return curMax;
-    };
-    var sortRow = function(d,index){
-        return _.sortBy(d, function(rowArr) {
-            return getVal(rowArr[index]);
-        });
-    };
-    return React.createClass({
+            }
+        })
+    });
+    return curMax;
+};
+var sortRow = function(d,index){
+    return _.sortBy(d, function(rowArr) {
+        return getVal(rowArr[index]);
+    });
+};
+
+
+var Body = React.createClass({
         getDefaultProps:getDefSortData,
         render: function(){
             var r = [];
@@ -89,66 +92,9 @@ var Body = (function(){
             return <tbody>{r}</tbody>;
         }
     });
-})();
 
 
 
-var Cell = (function(){
-    function getSortType (isReverse){
-        if(typeof isReverse === "boolean"){return isReverse ? 'desc':'asc'}
-    }
-    function postHandler(){
-        var postProcess = this.props.postProcess || function(){};
-        postProcess(this,this.props);
-    };
-    function preHandler(result,Component){
-        var preProcess = Component.props.preProcess;
-        if(typeof preProcess==="function"){
-            return preProcess(result,Component);
-        }else{
-            return result;
-        }
-    };
-    var Cell = React.createClass({
-        render: function(){
-            var max = this.props.max;
-            var val = this.props.value;
-            var type = this.props.type || 'd';
-            var result = null;
-            var cName ='';
-
-            if(util.isNumber(val)){
-                result = util.numComma(val);
-                cName = util.colorfullCell(val,max);
-            }else{
-                result = val;
-            }
-
-            var sortType = getSortType(this.props.isReverse);
-            if(sortType){
-                cName +=' sort_'+sortType;
-                if(type!=='h'){cName += '_cell'}
-            }
-
-
-            result = preHandler(result,this);
-
-            if(type==='h'){
-                return <th onClick={this.props.onClick} className={cName}>{result}</th>;
-            }else{
-                return <td className={cName}>{result}</td>;
-            }
-
-        },
-        componentDidUpdate:postHandler,
-        componentDidMount:postHandler
-    });
-
-
-    postHandler.bind(Cell);
-
-    return Cell;
-})();
 
 function getDefSortData(){
     return {
