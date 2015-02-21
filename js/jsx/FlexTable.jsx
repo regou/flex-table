@@ -76,7 +76,8 @@ var Body = (function(){
                 var items = rowItems.map(function(rowItem,i){
                     var additionProps = {
                         colIndex:i,
-                        postProcess:Component.props.postProcess.cell
+                        postProcess:Component.props.postProcess,
+                        preProcess:Component.props.preProcess
                     };
                     if(i==sortIndex){
                         additionProps.isReverse=isReverse;
@@ -100,6 +101,14 @@ var Cell = (function(){
         var postProcess = this.props.postProcess || function(){};
         postProcess(this,this.props);
     };
+    function preHandler(result,Component){
+        var preProcess = Component.props.preProcess;
+        if(typeof preProcess==="function"){
+            return preProcess(result,Component);
+        }else{
+            return result;
+        }
+    };
     var Cell = React.createClass({
         render: function(){
             var max = this.props.max;
@@ -120,6 +129,10 @@ var Cell = (function(){
                 cName +=' sort_'+sortType;
                 if(type!=='h'){cName += '_cell'}
             }
+
+
+            result = preHandler(result,this);
+
             if(type==='h'){
                 return <th onClick={this.props.onClick} className={cName}>{result}</th>;
             }else{
@@ -130,6 +143,7 @@ var Cell = (function(){
         componentDidUpdate:postHandler,
         componentDidMount:postHandler
     });
+
 
     postHandler.bind(Cell);
 
@@ -152,15 +166,19 @@ var FlexTable = React.createClass({
     },
     getDefaultProps:function(){
         return {
-            className:"",
-            tableData:{},
-            postProcess:{}
+            className: "",
+            tableData: {},
+            preProcess: null,
+            postProcess: null
         }
     },
     render:function(){
         return (<table className={'ps-flex-table '+this.props.className}>
             <Head {...this.state} updateSort={this._updateSortBy} data={this.props.tableData.thead}/>
-            <Body {...this.state} postProcess={this.props.postProcess} data={this.props.tableData.tbody}/>
+            <Body {...this.state}
+                preProcess={this.props.preProcess}
+                postProcess={this.props.postProcess}
+                data={this.props.tableData.tbody}/>
         </table>);
     }
 });
