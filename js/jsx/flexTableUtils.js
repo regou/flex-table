@@ -37,10 +37,19 @@ function colorfullCell(value,maxValue){
 function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
+var numFormat = (function(){
+    if(window.Intl && Intl.NumberFormat){
+        return new Intl.NumberFormat().format;
+    }else{
+       return function(str){
+           var str = str.toString();
+           return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       }
+    }
+})();
 function numComma (str) {
     if(isNumber(str)){
-        var str = str.toString();
-        return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return numFormat(str);
     }else{
         return str;
     }
