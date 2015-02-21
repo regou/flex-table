@@ -5,6 +5,7 @@
 .ps-flex-table tbody {line-height:1.1em;}
 .ps-flex-table tbody td {padding:10px 10px; border-bottom:#d2d2d2 solid 1px;vertical-align: middle;}
 
+.ps-flex-table .no-padding{padding: 0 !important;}
 
 
 
