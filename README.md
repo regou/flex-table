@@ -7,4 +7,6 @@ flex table for inSight
 
 `gulp`
 
-Then Open index.html
+Then open index.html, then play with the demo
+
+<img src="https://raw.github.com/regou/patsnap-flex-table/master/rdimg.jpg" >
