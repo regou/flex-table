@@ -1,12 +1,16 @@
-
+/*
+All cells Support two types of data:
+ a: "Sting"
+ b: {value:"String"[,]}
+ */
 var fakeData = {
     "thead": [
         "NAME",
-        "COUNT",
+        {value:"COUNT",autoBg:true},
         "TITLE",
         "APD",
         "PBD",
-        "CHART"
+        {value:"Trend",sortable:false}
     ],
     "tbody": [
         [

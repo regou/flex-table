@@ -11,29 +11,24 @@ function postHandler(){
     var postProcess = this.props.postProcess || function(){};
     postProcess(this,this.props);
 };
-function preHandler(result,Component){
+function preHandler(val,result,Component){
     var preProcess = Component.props.preProcess;
     if(typeof preProcess==="function"){
         return preProcess(result,Component);
     }else{
-        return result;
+        return val;
     }
 };
 
 var Cell = React.createClass({
     render: function(){
         var max = this.props.max;
-        var val = this.props.value;
+        var valObj = util.getValObj(this.props.value);
+        var val = valObj.value;
         var type = this.props.type || 'd';
         var result = null;
-        var cName ='';
+        var cName = this.props.baseClassName || '';
 
-        if(util.isNumber(val)){
-            result = util.numComma(val);
-            cName = util.colorfullCell(val,max);
-        }else{
-            result = val;
-        }
 
         var sortType = getSortType(this.props.isReverse);
         if(sortType){
@@ -41,8 +36,18 @@ var Cell = React.createClass({
             if(type!=='h'){cName += '_cell'}
         }
 
+        if(util.isNumber(val)){
+            cName += ' col-number';
+            result = util.numComma(val);
+            if(this.props.autoBg){
+                cName += util.colorfullCell(val,max);
+            }
+        }else{
+            result = valObj;
+        }
 
-        result = preHandler(result,this);
+
+        result = preHandler(val,result,this);
 
         if(type==='h'){
             return <th onClick={this.props.onClick} className={cName}>{result}</th>;

@@ -20,19 +20,19 @@
 
 
 
-.ps-flex-table thead th{cursor: pointer;}
+.ps-flex-table thead .sortableTh{cursor: pointer;}
 
 
 .ps-flex-table thead .sort_desc {background:bottom right no-repeat; background-image:url('./desc.png');}
 .ps-flex-table thead .sort_asc {background:bottom right no-repeat; background-image:url('./asc.png');}
-.ps-flex-table thead th:hover {
-    background: #fbfbfb;  Old browsers
-    background: -moz-linear-gradient(top,  #fbfbfb 0%, #f0f0f0 100%);  FF3.6+
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f0f0f0));  Chrome,Safari4+
-    background: -webkit-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);  Chrome10+,Safari5.1+
-    background: -o-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);  Opera 11.10+
-    background: -ms-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);  IE10+
-    background: linear-gradient(to bottom,  #fbfbfb 0%,#f0f0f0 100%);  W3C
+.ps-flex-table thead .sortableTh:hover {
+    background: #fbfbfb;
+    background: -moz-linear-gradient(top,  #fbfbfb 0%, #f0f0f0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f0f0f0));
+    background: -webkit-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);
+    background: -o-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);
+    background: -ms-linear-gradient(top,  #fbfbfb 0%,#f0f0f0 100%);
+    background: linear-gradient(to bottom,  #fbfbfb 0%,#f0f0f0 100%);
 
 }
 

@@ -16,15 +16,20 @@ var Head = React.createClass({
         }
     },
     render:function() {
+        var data = this.props.data.thead || {};
         var Component = this;
         var sortIndex = Component.props.sortByColIndex;
         var isReverse = Component.props.isReverse;
-        var r = this.props.data.map(function(headItem,i){
+        var r = data.map(function(headItem,i){
             var additionProps = {};
             if(i==sortIndex){
                 additionProps.isReverse = isReverse;
             }
-            return (<Cell {...additionProps} onClick={Component.props.updateSort.bind(null,i)} type="h" key={i} value={headItem}/>);
+            if(headItem.sortable!==false){
+                additionProps.onClick = Component.props.updateSort.bind(null,i);
+                additionProps.baseClassName = 'sortableTh';
+            }
+            return (<Cell {...additionProps} type="h" key={i} value={headItem}/>);
         });
         return <thead>{r}</thead>;
     }
@@ -32,15 +37,11 @@ var Head = React.createClass({
 });
 
 
-function getVal(cellData){
-    return typeof(cellData)==='object' ? cellData.value:cellData;
-}
-
 var getMax = function(d){
     var curMax = 0;
     d.forEach(function(rowArr){
         rowArr.forEach(function(cellData){
-            var comparer = getVal(cellData);
+            var comparer = util.getValObj(cellData).value;
             if(util.isNumber(comparer)){
                 comparer=comparer*1;
                 if(comparer>curMax){
@@ -53,7 +54,7 @@ var getMax = function(d){
 };
 var sortRow = function(d,index){
     return _.sortBy(d, function(rowArr) {
-        return getVal(rowArr[index]);
+        return util.getValObj(rowArr[index]).value;
     });
 };
 
@@ -63,7 +64,8 @@ var Body = React.createClass({
         render: function(){
             var r = [];
             var Component = this;
-            var d = Component.props.data;
+            var d = Component.props.data.tbody || {};
+            var theadData = Component.props.data.thead || {};
             var max = getMax(d);
 
             var sortIndex = Component.props.sortByColIndex;
@@ -84,6 +86,9 @@ var Body = React.createClass({
                     };
                     if(i==sortIndex){
                         additionProps.isReverse=isReverse;
+                    }
+                    if(theadData[i].autoBg!==false){
+                        additionProps.autoBg = true;
                     }
                     return <Cell {...additionProps} max={max} type="d" key={i} value={rowItem}/>;
                 });
@@ -120,11 +125,11 @@ var FlexTable = React.createClass({
     },
     render:function(){
         return (<table className={'ps-flex-table '+this.props.className}>
-            <Head {...this.state} updateSort={this._updateSortBy} data={this.props.tableData.thead}/>
+            <Head {...this.state} updateSort={this._updateSortBy} data={this.props.tableData}/>
             <Body {...this.state}
                 preProcess={this.props.preProcess}
                 postProcess={this.props.postProcess}
-                data={this.props.tableData.tbody}/>
+                data={this.props.tableData}/>
         </table>);
     }
 });

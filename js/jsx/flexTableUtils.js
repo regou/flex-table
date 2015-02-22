@@ -28,8 +28,10 @@ function colorfullCell(value,maxValue){
     });
 
     if(isNumber(+value)){
-        var classname = 'col-number table-cell-lv'+Math.round(color((+value)));
+        var classname = ' table-cell-lv'+Math.round(color((+value)));
         return classname;
+    }else{
+        return '';
     }
 };
 
@@ -55,11 +57,14 @@ function numComma (str) {
     }
 
 };
-
+function getValObj(cellData){
+    return typeof(cellData)==='object' ? cellData : {value:cellData};
+}
 
 module.exports = {
     delHtmlTag:delHtmlTag,
     isNumber:isNumber,
     numComma:numComma,
-    colorfullCell:colorfullCell
+    colorfullCell:colorfullCell,
+    getValObj:getValObj
 };
