@@ -3,9 +3,10 @@
 // Load some modules which are installed through NPM.
 var gulp = require('gulp');
 var browserify = require('browserify');  // Bundles JS.
-var del = require('del');  // Deletes files.
+
 var reactify = require('reactify');  // Transforms React JSX to JS.
 var source = require('vinyl-source-stream');
+var chalk = require('chalk');
 
 // Define some paths.
 var paths = {
@@ -24,6 +25,10 @@ gulp.task('js', function() {
     })
         .transform(reactify)
         .bundle()
+        .on('error', function(err){
+                  console.log(chalk.red(err.toString()));
+                  this.end();
+        })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./compiles/'));
 });
