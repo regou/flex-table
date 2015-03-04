@@ -11,6 +11,7 @@ var chalk = require('chalk');
 // Define some paths.
 var paths = {
     app_js: ['./js/index.js'],
+	flextable:['./js/FlexTable.js'],
     js: ['./js/**/*.js*']
 };
 
@@ -40,3 +41,19 @@ gulp.task('watch', function() {
 
 // The default task (called when we run `gulp` from cli)
 gulp.task('default', ['watch', 'js']);
+
+
+gulp.task('flextable', function() {
+	browserify({
+		entries:paths.flextable,
+		debug:false
+	})
+		.transform(reactify)
+		.bundle()
+		.on('error', function(err){
+			console.log(chalk.red(err.toString()));
+			this.end();
+		})
+		.pipe(source('FlexTable.js'))
+		.pipe(gulp.dest('./compiles/'));
+});
