@@ -36,7 +36,7 @@ var Cell = React.createClass({
             if(type!=='h'){cName += '_cell'}
         }
 
-        if(util.isNumber(val)){
+        if(type!=='h' && util.isNumber(val)){
             cName += ' col-number';
             result = util.numComma(val);
             if(this.props.autoBg){
