@@ -37,12 +37,18 @@ var Head = React.createClass({
 });
 
 
-var getMax = function(d){
+var getMax = function(d,theadData){
     var curMax = 0;
+	var rowExluder = _.map(theadData,function(thItem,index){
+		return {
+			index:index,
+			autoBg:thItem.autoBg !== false
+		}
+	});
     d.forEach(function(rowArr){
-        rowArr.forEach(function(cellData){
+        rowArr.forEach(function(cellData,i){
             var comparer = util.getValObj(cellData).value;
-            if(util.isNumber(comparer)){
+            if(rowExluder[i].autoBg && util.isNumber(comparer)){
                 comparer=comparer*1;
                 if(comparer>curMax){
                     curMax = comparer;
@@ -66,7 +72,7 @@ var Body = React.createClass({
             var Component = this;
             var d = Component.props.data.tbody || {};
             var theadData = Component.props.data.thead || {};
-            var max = getMax(d);
+            var max = getMax(d,theadData);
 
             var sortIndex = Component.props.sortByColIndex;
             var isReverse = Component.props.isReverse;

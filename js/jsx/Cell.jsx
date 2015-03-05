@@ -14,9 +14,9 @@ function postHandler(){
 function preHandler(val,result,Component){
     var preProcess = Component.props.preProcess;
     if(typeof preProcess==="function"){
-        return preProcess(result,Component);
+        return preProcess(result,Component,val);
     }else{
-        return val;
+        return typeof result==="string" ? result : val;
     }
 };
 
