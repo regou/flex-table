@@ -11,7 +11,7 @@ var chalk = require('chalk');
 // Define some paths.
 var paths = {
     app_js: ['./js/index.js'],
-	flextable:['./js/FlexTable.js'],
+	independent:['./js/FlexTable-independent.js'],
     js: ['./js/**/*.js*']
 };
 
@@ -45,7 +45,7 @@ gulp.task('default', ['watch', 'js']);
 
 gulp.task('independent', function() {
 	browserify({
-		entries:paths.flextable,
+		entries:paths.independent,
 		debug:false
 	})
 		.transform(reactify)
@@ -54,6 +54,6 @@ gulp.task('independent', function() {
 			console.log(chalk.red(err.toString()));
 			this.end();
 		})
-		.pipe(source('FlexTable.js'))
+		.pipe(source('FlexTable-independent.js'))
 		.pipe(gulp.dest('./compiles/'));
 });
