@@ -4,7 +4,7 @@ window.Comps = window.Comps || {};
 var FlexTableComp = require('./jsx/FlexTable.jsx');
 window.Comps.FlexTable = function(userConf,jqEle){
 	var defConf = {
-		className: "tidy_table",
+		className: "flex-table",
 		tableData:{}
 	};
 	var conf = _.assign(defConf,userConf);
