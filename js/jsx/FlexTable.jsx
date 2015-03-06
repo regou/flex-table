@@ -4,7 +4,7 @@
 
 var React = require('react');
 var util = require('./flexTableUtils');
-var _ = require('lodash');
+//var _ = require('lodash');
 
 
 var Cell = require('./Cell.jsx');
@@ -37,9 +37,10 @@ var Head = React.createClass({
 });
 
 
-var getMax = function(d,theadData){
-    var curMax = 0;
-	var rowExluder = _.map(theadData,function(thItem,index){
+var getRange = function(d,theadData){
+    var curMax = undefined;
+	var curMin = undefined;
+	var rowExcluder = _.map(theadData,function(thItem,index){//exclude some data
 		return {
 			index:index,
 			autoBg:thItem.autoBg !== false
@@ -48,15 +49,19 @@ var getMax = function(d,theadData){
     d.forEach(function(rowArr){
         rowArr.forEach(function(cellData,i){
             var comparer = util.getValObj(cellData).value;
-            if(rowExluder[i].autoBg && util.isNumber(comparer)){
-                comparer=comparer*1;
-                if(comparer>curMax){
-                    curMax = comparer;
-                }
+            if(rowExcluder[i].autoBg && util.isNumber(comparer)){
+				comparer=comparer*1;
+				if(curMax==undefined || curMin==undefined){
+					curMax = comparer;curMin = comparer;//preInit
+				}
+                if(comparer>curMax){curMax = comparer;}
+				if(comparer<curMin){curMin = comparer;}
             }
         })
     });
-    return curMax;
+	var res = [curMin,curMax];
+	if(typeof curMin!=="number" || typeof curMax!=="number"){res = [0,0]}
+    return res;
 };
 var sortRow = function(d,index){
     return _.sortBy(d, function(rowArr) {
@@ -72,7 +77,8 @@ var Body = React.createClass({
             var Component = this;
             var d = Component.props.data.tbody || {};
             var theadData = Component.props.data.thead || {};
-            var max = getMax(d,theadData);
+			var range = getRange(d,theadData);
+
 
             var sortIndex = Component.props.sortByColIndex;
             var isReverse = Component.props.isReverse;
@@ -96,7 +102,7 @@ var Body = React.createClass({
                     if(theadData[i].autoBg!==false){
                         additionProps.autoBg = true;
                     }
-                    return <Cell {...additionProps} max={max} type="d" key={i} value={rowItem}/>;
+                    return <Cell {...additionProps} range={range} type="d" key={i} value={rowItem}/>;
                 });
                 r.push(<tr key={i}>{items}</tr>)
             });

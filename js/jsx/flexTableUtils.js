@@ -20,10 +20,10 @@ function linear (o){
      }
 };
 
-function colorfullCell(value,maxValue){
+function colorfullCell(value,range){
 
     var color = linear({
-        domain:[0,maxValue],
+        domain:range,
         range:[0,4]
     });
 
