@@ -22,10 +22,11 @@ function preHandler(val,result,Component){
 
 var Cell = React.createClass({
     render: function(){
-        var max = this.props.max;
+
         var valObj = util.getValObj(this.props.value);
         var val = valObj.value;
         var type = this.props.type || 'd';
+		var isRawHtml = valObj.isRawHtml;
         var result = null;
         var cName = this.props.baseClassName || '';
 
@@ -37,10 +38,13 @@ var Cell = React.createClass({
         }
 
         if(type!=='h' && util.isNumber(val)){
-            cName += ' col-number';
-            result = util.numComma(val);
+            cName += ' flextable-col-number';
+
+			var range = this.props.range;
+			result = util.numComma(val);
+			result = result==0 ? '-':result;
             if(this.props.autoBg){
-                cName += util.colorfullCell(val,max);
+                cName += util.colorfullCell(val,range);
             }
         }else{
             result = valObj;
@@ -50,9 +54,10 @@ var Cell = React.createClass({
         result = preHandler(val,result,this);
 
         if(type==='h'){
-            return <th onClick={this.props.onClick} className={cName}>{result}</th>;
+
+            return isRawHtml ? (<th onClick={this.props.onClick} className={cName} dangerouslySetInnerHTML={{__html: result}}></th>) : (<th onClick={this.props.onClick} className={cName}>{result}</th>);
         }else{
-            return <td className={cName}>{result}</td>;
+			return isRawHtml ? (<td className={cName} dangerouslySetInnerHTML={{__html: result}}></td>) : (<td className={cName}>{result}</td>);
         }
 
     },

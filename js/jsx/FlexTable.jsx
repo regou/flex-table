@@ -4,7 +4,7 @@
 
 var React = require('react');
 var util = require('./flexTableUtils');
-//var _ = require('lodash');
+var _ = require('lodash');
 
 
 var Cell = require('./Cell.jsx');
