@@ -43,7 +43,7 @@ gulp.task('watch', function() {
 gulp.task('default', ['watch', 'js']);
 
 
-gulp.task('flextable', function() {
+gulp.task('independent', function() {
 	browserify({
 		entries:paths.flextable,
 		debug:false
