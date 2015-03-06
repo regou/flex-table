@@ -4,7 +4,7 @@
 
 var React = require('react');
 var util = require('./flexTableUtils');
-var _ = require('lodash');
+
 
 
 var Cell = require('./Cell.jsx');
@@ -40,7 +40,7 @@ var Head = React.createClass({
 var getRange = function(d,theadData){
     var curMax = undefined;
 	var curMin = undefined;
-	var rowExcluder = _.map(theadData,function(thItem,index){//exclude some data
+	var rowExcluder = theadData.map(function(thItem,index){//exclude some data
 		return {
 			index:index,
 			autoBg:thItem.autoBg !== false
@@ -64,9 +64,19 @@ var getRange = function(d,theadData){
     return res;
 };
 var sortRow = function(d,index){
-    return _.sortBy(d, function(rowArr) {
-        return util.getValObj(rowArr[index]).value;
-    });
+	var getVal = function(rowArr){
+		return util.getValObj(rowArr[index]).value;
+	};
+
+	return d.sort(function (a, b) {
+		if (getVal(a) > getVal(b)) {
+			return 1;
+		}
+		if (getVal(a) < getVal(b)) {
+			return -1;
+		}
+		return 0;
+	});
 };
 
 
