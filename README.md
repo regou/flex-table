@@ -12,23 +12,24 @@ Then open index.html, then play with the demo
 <img src="https://raw.github.com/regou/patsnap-flex-table/master/rdimg.jpg" >
 
 
-### Cell config expample:
+### Single table cell config expample:
 
-Every single cell data can be a `String` or an `Object`
-if a cell data is an `Object` ,it will be a cell data config contains cell value
+Every single table cell data can be a `String`, `Number` or a configuration `Object`
 
 ```javascript 
 {
   value:'5',//define the value of the cell,if not set,you must handle cell data on pre/postprocess
-  autoBg:true,//the cell need auto Background color highlight
-  sortable:true,//Config if the column is sortable.Only aceept on thead
-  isRawHtml:false//Set true if value is a html string(no html escaping)
+  autoBg:true,//the cell need auto Background color highlight,default is true
+  sortable:true,//Config if the column is sortable.Only aceept on thead default is true
+  isRawHtml:false//Set true if value is a html string(no html escaping),default is false
 }
 ```
 
 ### Usage:
 ```javascript
-React.render(<FlexTable preProcess={preProcess} postProcess={postProcess}
+React.render(<FlexTable 
+    preProcess={preProcess} //handle passed celldata
+    postProcess={postProcess}//hanlde generated <td> dom element
     className='data-table' tableData={exampleTableData}/>,document.body);
 ```
 
