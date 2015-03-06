@@ -18,7 +18,7 @@ Every single table cell data can be a `String`, `Number` or a configuration `Obj
 
 ```javascript 
 {
-  value:'5',//define the value of the cell,if not set,you must handle cell data on pre/postprocess
+  value:'5',//define the value of the cell,if not set,you must handle it on pre/postprocess
   autoBg:true,//the cell need auto Background color highlight,default is true
   sortable:true,//Config if the column is sortable.Only aceept on thead default is true
   isRawHtml:false//Set true if value is a html string(no html escaping),default is false
