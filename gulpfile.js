@@ -8,6 +8,9 @@ var reactify = require('reactify');  // Transforms React JSX to JS.
 var source = require('vinyl-source-stream');
 var chalk = require('chalk');
 
+var uglify = require('gulp-uglify');
+var streamify = require('gulp-streamify')
+
 // Define some paths.
 var paths = {
     app_js: ['./js/index.js'],
@@ -55,5 +58,6 @@ gulp.task('independent', function() {
 			this.end();
 		})
 		.pipe(source('FlexTable-independent.js'))
+		.pipe(streamify(uglify()))
 		.pipe(gulp.dest('./compiles/'));
 });
