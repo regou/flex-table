@@ -26,11 +26,11 @@ Every single table cell data can be a `String`, `Number` or a configuration `Obj
 ```
 
 ### Usage:
-```javascript
-React.render(<FlexTable 
+```jsx
+  <FlexTable tableData={exampleTableData}
     preProcess={preProcess} //handle passed celldata
     postProcess={postProcess}//hanlde generated <td> dom element
-    className='data-table' tableData={exampleTableData}/>,document.body);
+    className='data-table' />
 ```
 
 
