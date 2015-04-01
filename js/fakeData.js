@@ -127,4 +127,4 @@ var fakeData = {
 };
 
 
-module.exports = fakeData;
+export default fakeData;

@@ -41,7 +41,7 @@ gulp.task('js', function() {
 
 // Rerun tasks whenever a file changes.
 gulp.task('watch', function() {
-    gulp.watch(paths.js, ['js']);
+    return gulp.watch(paths.js, ['js']);
 });
 
 // The default task (called when we run `gulp` from cli)
@@ -49,7 +49,7 @@ gulp.task('default', ['watch', 'js']);
 
 
 gulp.task('independent', function() {
-	browserify({
+	return browserify({
 		entries:paths.independent,
 		debug:false
 	})

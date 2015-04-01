@@ -61,10 +61,10 @@ function getValObj(cellData){
     return typeof(cellData)==='object' ? cellData : {value:cellData};
 }
 
-module.exports = {
-    delHtmlTag:delHtmlTag,
-    isNumber:isNumber,
-    numComma:numComma,
-    colorfullCell:colorfullCell,
-    getValObj:getValObj
+export default {
+    delHtmlTag,
+    isNumber,
+    numComma,
+    colorfullCell,
+    getValObj
 };

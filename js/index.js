@@ -1,8 +1,8 @@
 var React = require('react');
-var tableData = require('./fakeData');
-var BarChart = require('./jsx/BarChart.jsx');
-var FlexTable = require('./jsx/FlexTable.jsx');
 
+import tableData from './fakeData';
+import BarChart from './jsx/BarChart.jsx';
+import FlexTable from './jsx/FlexTable.jsx';
 
 
 

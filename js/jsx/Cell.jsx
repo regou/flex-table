@@ -1,6 +1,6 @@
 
 var React = require('react');
-var util = require('./flexTableUtils');
+import util from './flexTableUtils';
 
 
 function getSortType (isReverse){
