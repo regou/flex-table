@@ -29,7 +29,7 @@ function isChart(cellComp){
 }
 var postProcess = function(cellComp,props){
    if(isChart(cellComp)){
-      cellComp.getDOMNode().classList.add('no-padding');
+      cellComp.getDOMNode().className += (' no-padding');
    }
 };
 
