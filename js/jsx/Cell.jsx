@@ -66,4 +66,4 @@ var Cell = React.createClass({
 postHandler.bind(Cell);
 
 
-module.exports = Cell;
+export default Cell;

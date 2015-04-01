@@ -7,7 +7,7 @@ var fakeData = {
     "thead": [
         "NAME",
         {value:"COUNT",autoBg:true},
-        "TITLE",
+        {value:"TITLE",autoBg:false},
         "APD",
         "PBD",
         {value:"Trend",sortable:false}

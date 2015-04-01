@@ -5,8 +5,7 @@ var React = require('react');
 import util from './flexTableUtils';
 
 
-
-var Cell = require('./Cell.jsx');
+import Cell from './Cell.jsx';
 
 var Head = React.createClass({
     getDefaultProps:function(){
