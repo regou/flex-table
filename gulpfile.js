@@ -9,7 +9,9 @@ var source = require('vinyl-source-stream');
 var chalk = require('chalk');
 
 var uglify = require('gulp-uglify');
-var streamify = require('gulp-streamify')
+var streamify = require('gulp-streamify');
+
+var babelify = require("babelify");
 
 // Define some paths.
 var paths = {
@@ -23,18 +25,18 @@ var paths = {
 // Our JS task. It will Browserify our code and compile React JSX files.
 gulp.task('js', function() {
     // Browserify/bundle the JS.
-    browserify({
-        entries:paths.app_js,
-        debug:true
-    })
-        .transform(reactify)
+
+    return browserify({ debug: true })
+        .transform(babelify)
+        .require(paths.app_js, { entry: true })
         .bundle()
-        .on('error', function(err){
-                  console.log(chalk.red(err.toString()));
-                  this.end();
+        .on("error", function (err) {
+            console.log(chalk.red(err.toString()));
+            this.end();
         })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./compiles/'));
+
 });
 
 // Rerun tasks whenever a file changes.

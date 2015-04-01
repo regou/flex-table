@@ -24,6 +24,7 @@
     "chalk": "^0.5.1",
     "reactify": "^1.0.0",
     "gulp-uglify": "^1.1.0",
-    "gulp-streamify": "0.0.5"
+    "gulp-streamify": "0.0.5",
+    "babelify": "^5.0.4"
   }
 }
