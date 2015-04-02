@@ -1,4 +1,5 @@
 var React = require('react');
+require('react/addons');
 
 import tableData from './fakeData';
 import BarChart from './jsx/BarChart.jsx';
@@ -35,11 +36,11 @@ var postProcess = function(cellComp,props){
 
 
 
-var preProcess = function(res,cellComp){
+var preProcess = function(res,cellComp,val){
    if(isChart(cellComp)){
       return <BarChart data={res.data}/>;
    }else{
-      return res;
+      return val;
    }
 };
 

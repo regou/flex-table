@@ -97,7 +97,7 @@ var Body = React.createClass({
                 }
             }
 
-            d.forEach(function(rowItems,i){
+            d.forEach(function(rowItems,j){
                 var items = rowItems.map(function(rowItem,i){
                     var additionProps = {
                         colIndex:i,
@@ -112,7 +112,7 @@ var Body = React.createClass({
                     }
                     return <Cell {...additionProps} range={range} type="d" key={i} value={rowItem}/>;
                 });
-                r.push(<tr key={i}>{items}</tr>)
+                r.push(<tr key={j}>{items}</tr>)
             });
             return <tbody>{r}</tbody>;
         }
