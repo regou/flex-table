@@ -4,12 +4,11 @@
 var gulp = require('gulp');
 var browserify = require('browserify');  // Bundles JS.
 
-var reactify = require('reactify');  // Transforms React JSX to JS.
 var source = require('vinyl-source-stream');
 var chalk = require('chalk');
+var plumber = require('gulp-plumber');
 
-var uglify = require('gulp-uglify');
-var streamify = require('gulp-streamify');
+
 
 var babelify = require("babelify");
 
@@ -47,19 +46,3 @@ gulp.task('watch', function() {
 // The default task (called when we run `gulp` from cli)
 gulp.task('default', ['watch', 'js']);
 
-
-gulp.task('independent', function() {
-	return browserify({
-		entries:paths.independent,
-		debug:false
-	})
-		.transform(reactify)
-		.bundle()
-		.on('error', function(err){
-			console.log(chalk.red(err.toString()));
-			this.end();
-		})
-		.pipe(source('FlexTable-independent.js'))
-		.pipe(streamify(uglify()))
-		.pipe(gulp.dest('./compiles/'));
-});

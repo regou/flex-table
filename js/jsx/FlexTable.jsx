@@ -154,8 +154,4 @@ var FlexTable = React.createClass({
     }
 });
 
-
-
-
-
-module.exports = FlexTable;
+export default FlexTable;
