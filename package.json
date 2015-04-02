@@ -16,12 +16,12 @@
   "homepage": "https://github.com/regou/patsnap-flex-table",
   "devDependencies": {
     "babelify": "^5.0.4",
-    "browserify": "*",
+    "browserify": "^9.0.0",
+    "vinyl-source-stream": "^1.0.0",
     "chalk": "^0.5.1",
-    "d3": "^3.5.5",
     "gulp": "^3.8.11",
-    "gulp-plumber": "^1.0.0",
+    "gulp-notify": "^2.2.0",
     "react": "^0.13.1",
-    "vinyl-source-stream": "^1.0.0"
+    "d3": "^3.5.5"
   }
 }

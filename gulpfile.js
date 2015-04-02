@@ -6,7 +6,7 @@ var browserify = require('browserify');  // Bundles JS.
 
 var source = require('vinyl-source-stream');
 var chalk = require('chalk');
-var plumber = require('gulp-plumber');
+var notify = require("gulp-notify");
 
 
 
@@ -31,7 +31,12 @@ gulp.task('js', function() {
         .bundle()
         .on("error", function (err) {
             console.log(chalk.red(err.toString()));
-            this.end();
+            this.emit('end');
+            notify({
+                message: "Error: " + err.message,
+                title: "¥ÚÀ¿ƒ„"
+            })
+
         })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./compiles/'));
