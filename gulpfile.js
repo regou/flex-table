@@ -34,7 +34,7 @@ gulp.task('js', function() {
             this.emit('end');
             notify({
                 message: "Error: " + err.message,
-                title: "´òËÀÄã"
+                title: "Failed running browserify"
             })
 
         })
