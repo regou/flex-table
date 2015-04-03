@@ -5,7 +5,7 @@ flex table for inSight
 
 `$ > npm install`
 
-`$ > gulp`
+`$ > npm run dev`
 
 Then open index.html, then play with the demo
 
