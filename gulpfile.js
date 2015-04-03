@@ -24,7 +24,7 @@ function notiErr(err){
     var notiConf = {};
     if(err){
         notiConf = {
-            message: "Error: " + err.message,
+            message: "Error: " + err.message.slice(0,30),
             title: "Failed running browserify",
             icon: path.join(__dirname, 'fail.png')
         };
