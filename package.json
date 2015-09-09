@@ -2,7 +2,7 @@
   "name": "patsnap-flex-table",
   "version": "0.0.0",
   "description": "flex table for inSight",
-  "main": "index.js",
+  "main": "./js/jsx/FlexTable.js",
   "scripts": {
     "pub": "gulp js && exit 1",
     "dev": "gulp"
@@ -14,6 +14,9 @@
   "author": "wangxiao",
   "license": "ISC",
   "homepage": "https://github.com/regou/patsnap-flex-table",
+  "peerDependencies": {
+    "react": ">=0.13.0"
+  },
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "9.0.4",
@@ -22,7 +25,6 @@
     "gulp": "^3.8.11",
     "gulp-notify": "^2.2.0",
     "node-notifier": "^4.1.2",
-    "react": "^0.13.1",
     "vinyl-source-stream": "^1.0.0"
   }
 }
