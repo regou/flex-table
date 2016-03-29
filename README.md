@@ -1,5 +1,5 @@
 # flex-table
-flex table for inSight
+React flex table
 
 `$ > npm install -g gulp`
 
