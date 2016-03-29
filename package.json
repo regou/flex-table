@@ -1,5 +1,5 @@
 {
-  "name": "patsnap-flex-table",
+  "name": "react-flex-table",
   "version": "0.0.0",
   "description": "flex table for inSight",
   "main": "./js/jsx/FlexTable.js",
@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/regou/patsnap-flex-table"
+    "url": "https://github.com/regou/flex-table"
   },
   "author": "wangxiao",
   "license": "ISC",
-  "homepage": "https://github.com/regou/patsnap-flex-table",
+  "homepage": "https://github.com/regou/flex-table",
   "peerDependencies": {
     "react": ">=0.13.0"
   },
