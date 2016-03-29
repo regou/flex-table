@@ -1,4 +1,4 @@
-# patsnap-flex-table
+# flex-table
 flex table for inSight
 
 `$ > npm install -g gulp`
@@ -9,7 +9,7 @@ flex table for inSight
 
 Then open index.html, then play with the demo
 
-<img src="https://raw.github.com/regou/patsnap-flex-table/master/rdimg.jpg" >
+<img src="https://raw.github.com/regou/flex-table/master/rdimg.jpg" >
 
 
 ### Single table cell config expample:
